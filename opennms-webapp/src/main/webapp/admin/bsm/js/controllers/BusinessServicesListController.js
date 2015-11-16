@@ -63,8 +63,7 @@
                     };
 
                     $scope.goEdit = function(id) {
-                        //TODO fix routing and or base path problems
-                        $window.location.href = 'admin/bsm/index.jsp#edit/' + id;
+                        $location.path('edit/' + id);
                     };
 
                 }]);

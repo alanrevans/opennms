@@ -19,7 +19,7 @@
                     }).$update().
                         then(function () {
                             $log.debug("update of bs complete");
-                            $window.location.href = "admin/bsm/index.jsp";
+                            $location.path('/');
                         })
                         .catch(function (req) {
                             $log.debug("update of bs failed: " + req);
@@ -29,7 +29,7 @@
 
             $scope.bsCancel = function () {
                 $log.debug("cancel bs");
-                $window.location.href = "admin/bsm/index.jsp";
+                $location.path('/');
             };
 
         }]);
