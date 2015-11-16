@@ -7,6 +7,7 @@
                     // Fetch all of the items
                     var listBS = function () {
                         $log.debug("listBS called");
+
                         BusinessServices.query(
                                 {
                                     limit: 0,
@@ -60,17 +61,11 @@
                                     $log.debug("delete failed for " + id);
                                 });
                     };
-                    
+
                     $scope.goEdit = function(id) {
-                        $window.location.href = '#edit/' + id;
+                        //TODO fix routing and or base path problems
+                        $window.location.href = 'admin/bsm/index.jsp#edit/' + id;
                     };
-                    
-//                    $scope.bsEdit = function (businessServiceToEdit) {
-//                        $log.debug("bsEdit");
-//                        $log.debug("bsEdit BS: " + businessServiceToEdit.name);
-//                        $scope.businessServiceToEdit = businessServiceToEdit;
-//                        $location.path('/edit');
-//                    };
-                    
+
                 }]);
 }());

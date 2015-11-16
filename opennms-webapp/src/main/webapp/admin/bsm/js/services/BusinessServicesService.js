@@ -1,7 +1,7 @@
 (function () {
     'use strict';
     angular.module('businessServices').factory('BusinessServices', function ($resource, $log, $http) {
-        return $resource('api/v2/business-services/:id', {},
+        return $resource('api/v2/business-services/:id', {id: '@id'},
                 {
                     'query': {
                         method: 'GET',
@@ -11,6 +11,12 @@
                             // Always return the data as an array
                             return angular.isArray(data['business-service']) ? data['business-service'] : [data['business-service']];
                         })
+                    },
+                    'update': {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
                     }
                 }
         );

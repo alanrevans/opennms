@@ -6,9 +6,14 @@
         </div>
         <div class="panel-body" ng-if="bsToEdit.id > 0">
             <strong>ID: {{bsToEdit.id}}</strong>
-            <br />
-            <strong>Name: {{bsToEdit.name}}</strong>
+        <form>
+            <div class="form-group">
+                <label for="bsName">Business Service Name</label>
+                <input ng-model="bsToEdit.name" type="text" class="form-control" id="bsName" placeholder="Business Service Name" value="{{bsToEdit.name}}">
+            </div>
+            <button type="submit" class="btn btn-default" ng-click="bsUpdate()">Update</button>
+            <button type="submit" class="btn btn-default" ng-click="bsCancel()">Cancel</button>
+        </form>
         </div>
-        
     </div>
 </div>

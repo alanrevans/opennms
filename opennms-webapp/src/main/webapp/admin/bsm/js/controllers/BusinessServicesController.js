@@ -17,7 +17,7 @@
                             controller: 'BusinessServicesEditController',
                             templateUrl: 'admin/bsm/views/edit.html'
                         })
-                .otherwise({redirectTo: '/'});
+                .otherwise({redirectTo:'/'});
     });
 
     angular.element(document).ready(function () {
