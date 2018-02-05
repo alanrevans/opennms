@@ -65,7 +65,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 public class HttpNotificationStrategy implements NotificationStrategy {
     private static final Logger LOG = LoggerFactory.getLogger(HttpNotificationStrategy.class);
 
-    private List<Argument> m_arguments;
+    protected List<Argument> m_arguments;
 
     /* (non-Javadoc)
      * @see org.opennms.netmgt.notifd.NotificationStrategy#send(java.util.List)
@@ -126,7 +126,7 @@ public class HttpNotificationStrategy implements NotificationStrategy {
         return statusCode;
     }
 
-    private void doSql(String contents) {
+    protected void doSql(String contents) {
         if (getSql() == null) {
             LOG.info("send: optional sql argument is null.");
             return;
@@ -152,7 +152,7 @@ public class HttpNotificationStrategy implements NotificationStrategy {
         }
     }
 
-    private List<NameValuePair> getPostArguments() {
+    protected List<NameValuePair> getPostArguments() {
         List<Argument> args = getArgsByPrefix("post-");
         List<NameValuePair> retval = new ArrayList<NameValuePair>();
         for (Argument arg : args) {
@@ -165,7 +165,7 @@ public class HttpNotificationStrategy implements NotificationStrategy {
         return retval;
     }
 
-    private String getValue(String argValue) {
+    protected String getValue(String argValue) {
         if (argValue.equals(NotificationManager.PARAM_DESTINATION))
             return getNotificationValue(NotificationManager.PARAM_DESTINATION);
         if (argValue.equals(NotificationManager.PARAM_EMAIL))
@@ -208,18 +208,18 @@ public class HttpNotificationStrategy implements NotificationStrategy {
         return argValue;
     }
 
-    private String getNotificationValue(final String notificationManagerParamString) {
-        String message = "no notification text message defined for the \""+notificationManagerParamString+"\" switch.";
+    protected String getNotificationValue(final String notificationManagerParamString) {
+        String message = null;
         for (Iterator<Argument> it = m_arguments.iterator(); it.hasNext();) {
             Argument arg = it.next();
             if (arg.getSwitch().equals(notificationManagerParamString))
                 message = arg.getValue();
         }
-        LOG.debug("getNotificationValue: {}", message);
+        LOG.debug("getNotificationValue: {}", notificationManagerParamString + "->" + message);
         return message;
     }
 
-    private List<Argument> getArgsByPrefix(String argPrefix) {
+    protected List<Argument> getArgsByPrefix(String argPrefix) {
         List<Argument> args = new ArrayList<Argument>();
         for (Iterator<Argument> it = m_arguments.iterator(); it.hasNext();) {
             Argument arg = it.next();
@@ -230,18 +230,18 @@ public class HttpNotificationStrategy implements NotificationStrategy {
         return args;
     }
 
-    private String getSql() {
+    protected String getSql() {
         return getSwitchValue("sql");
     }
 
-    private String getUrl() {
+    protected String getUrl() {
         String url = getSwitchValue("url");
         if ( url == null )
             url = getUrlAsPrefix();
         return url;
     }
 
-    private String getUrlAsPrefix() {
+    protected String getUrlAsPrefix() {
         String url = null; 
         for (Argument arg: getArgsByPrefix("url")) {
             LOG.debug("Found url switch: {} with value: {}", arg.getSwitch(), arg.getValue());
@@ -255,7 +255,7 @@ public class HttpNotificationStrategy implements NotificationStrategy {
      * @param argSwitch
      * @return
      */
-    private String getSwitchValue(String argSwitch) {
+    protected String getSwitchValue(String argSwitch) {
         String value = null;
         for (Iterator<Argument> it = m_arguments.iterator(); it.hasNext();) {
             Argument arg = it.next();

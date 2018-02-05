@@ -56,7 +56,7 @@
             <version>1.0-alpha-1</version>
             <configuration>
               <!-- You may have to change this path if you install NSIS in a different directory -->
-              <makensisBin>C:\Progra~1\NSIS\makensis.exe</makensisBin>
+              <makensisBin>/usr/bin/makensis</makensisBin>
               <scriptFile>remote-poller.nsi</scriptFile>
             </configuration>
             <executions>
